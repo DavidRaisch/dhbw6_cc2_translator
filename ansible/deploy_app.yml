@@ -1,0 +1,55 @@
+
+- name: Deploy Translator App on Azure VM
+  hosts: translator_vms
+  become: yes
+  vars:
+    deepL_auth_key: "a42b45fd-2592-4d84-a3cb-78372bff4a67:fx"
+    database_url: "mongodb+srv://davidraisch:2pqyRmoLzOQfqqo3@translator.lpyuz.mongodb.net/?retryWrites=true&w=majority&appName=translator"
+    container_image: "davidraisch/translator-app:latest"
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+
+    - name: Fix dependency issues
+      command: apt-get install -f -y
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+      become: yes
+
+
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Add azureuser to docker group
+      user:
+        name: azureuser
+        groups: docker
+        append: yes
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull the translator container image
+      docker_image:
+        name: "{{ container_image }}"
+        source: pull
+
+    - name: Run translator container
+      docker_container:
+        name: translator_app
+        image: "{{ container_image }}"
+        state: started
+        restart_policy: always
+        published_ports:
+          - "5005:5000"
+        env:
+          DEEPL_AUTH_KEY: "{{ deepL_auth_key }}"
+          DATABASE_URL: "{{ database_url }}"
