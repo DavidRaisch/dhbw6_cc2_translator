@@ -1,0 +1,12 @@
+{
+  "mongodb_connection_string": {
+    "sensitive": true,
+    "type": "string",
+    "value": "mongodb+srv://translator_user:#1234Jr@translator-cluster.4ahf6.mongodb.net"
+  },
+  "public_ip_address": {
+    "sensitive": false,
+    "type": "string",
+    "value": "20.169.219.238"
+  }
+}

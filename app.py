@@ -5,26 +5,25 @@ import requests
 from pymongo import MongoClient
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with a secure value
+app.secret_key = 'your_secret_key'  # Ersetze diesen Wert durch einen sicheren Secret-Key
 
-# MongoDB connection string (use environment variable DATABASE_URL if set)
-connection_url = os.environ.get(
-    'DATABASE_URL',
-    "mongodb+srv://davidraisch:2pqyRmoLzOQfqqo3@translator.lpyuz.mongodb.net/?retryWrites=true&w=majority&appName=translator"
-)
+# Hole den MongoDB-Verbindungsstring aus der Umgebungsvariable.
+connection_url = os.environ.get("MONGODB_CONNECTION_STRING")
+if not connection_url:
+    raise Exception("MONGODB_CONNECTION_STRING is not set!")
 
-# Connect to MongoDB
+# Verbindung zu MongoDB herstellen
 client = MongoClient(connection_url)
-# Choose a database (change "translator" to your desired database name)
-db = client["translator"]
-# Use a collection named "translations"
+# Wähle die Datenbank "translator". Alternativ: client.get_default_database()
+db = client["translator-cluster"]
+# Benutze eine Collection namens "translations" zur Speicherung der Übersetzungen
 translations_collection = db.translations
 
-# DeepL API configuration
+# DeepL API Konfiguration
 DEEPL_AUTH_KEY = os.environ.get("DEEPL_AUTH_KEY", "YOUR_DEEPL_AUTH_KEY")
 DEEPL_API_URL = "https://api-free.deepl.com/v2/translate"
 
-# Example list of supported languages
+# Liste unterstützter Sprachen
 LANGUAGES = [
     ("auto", "Auto Detect"),
     ("BG", "Bulgarian"),
@@ -82,7 +81,7 @@ def index():
         elif not target_lang:
             flash('Please select a target language.')
         else:
-            # Check if the translation already exists in the database
+            # Überprüfe, ob die Übersetzung bereits in der Datenbank existiert
             existing = translations_collection.find_one({
                 "text": text,
                 "source_lang": source_lang,
@@ -107,3 +106,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+
