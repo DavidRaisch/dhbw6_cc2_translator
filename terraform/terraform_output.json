@@ -1,12 +1,17 @@
 {
+  "deepl_auth_key": {
+    "sensitive": true,
+    "type": "string",
+    "value": "a42b45fd-2592-4d84-a3cb-78372bff4a67:fx"
+  },
   "mongodb_connection_string": {
     "sensitive": true,
     "type": "string",
-    "value": "mongodb+srv://translator_user:#1234Jr@translator-cluster.4ahf6.mongodb.net"
+    "value": "mongodb+srv://translator_user:#1234Jrgj@translator-cluster.qihoz.mongodb.net"
   },
   "public_ip_address": {
     "sensitive": false,
     "type": "string",
-    "value": "20.169.219.238"
+    "value": "52.191.48.228"
   }
 }

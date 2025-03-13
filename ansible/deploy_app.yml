@@ -1,28 +1,22 @@
-
 - name: Deploy Translator App on Azure VM
   hosts: translator_vms
   become: yes
   vars:
-    deepL_auth_key: "a42b45fd-2592-4d84-a3cb-78372bff4a67:fx"
-    # Lade den Terraform-Output aus der Datei terraform_output.json
-    #terraform_outputs: "{{ lookup('file', 'terraform_output.json') | from_json }}"
-    # Setze die database_url aus dem Terraform-Output
-    #database_url: "{{ terraform_outputs.mongodb_connection_string.value }}"
-    database_url: "mongodb+srv://translator_user:#1234Jr@translator-cluster.4ahf6.mongodb.net"
+    deepL_auth_key: "{{ lookup('env', 'DEEPL_AUTH_KEY') }}"
+    database_url: "{{ lookup('env', 'MONGODB_CONNECTION_STRING') }}"
     container_image: "davidraisch/translator-app:latest"
+
+
   tasks:
     - name: Update apt cache
       apt:
         update_cache: yes
-
 
     - name: Fix dependency issues
       command: apt-get install -f -y
       environment:
         DEBIAN_FRONTEND: noninteractive
       become: yes
-
-
 
     - name: Install Docker
       apt:
