@@ -29,16 +29,6 @@ module "mongodb_atlas" {
   vm_public_ip                   = module.azure_infrastructure.public_ip
 }
 
-// Null resource to output terraform outputs to a JSON file (optional)
-resource "null_resource" "write_tf_output" {
-  triggers = {
-    always = timestamp()
-  }
-  provisioner "local-exec" {
-    command = "terraform output -json > terraform_output.json"
-  }
-}
-
 # Create dynamic inventory file in the ansible folder from a template
 resource "local_file" "inventory" {
   filename = "${path.module}/../ansible/inventory.ini" 
