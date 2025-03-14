@@ -46,8 +46,12 @@
         image: "{{ container_image }}"
         state: started
         restart_policy: always
+        pull: yes  
         published_ports:
           - "5005:5000"
         env:
           DEEPL_AUTH_KEY: "{{ deepL_auth_key }}"
           MONGODB_CONNECTION_STRING: "{{ database_url }}"
+
+
+#TODO: give output message with the ip adress and the port

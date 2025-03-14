@@ -1,75 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>DeepL Translator App</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-          padding-top: 40px;
-          background-color: #f8f9fa;
-      }
-      .container {
-          max-width: 600px;
-          background: white;
-          padding: 30px;
-          border-radius: 10px;
-          box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-      }
-    </style>
+  <meta charset="UTF-8">
+  <title>DeepL Translator App</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 40px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 900px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    /* Ensure the clear button appears inside the textarea container */
+    .position-relative .btn-close {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mb-4">DeepL Translator App</h1>
-        <form method="post">
-            <div class="mb-3">
-                <label for="text" class="form-label">Text to translate:</label>
-                <input type="text" class="form-control" id="text" name="text" required>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="source_lang" class="form-label">Source Language:</label>
-                    <select id="source_lang" name="source_lang" class="form-select">
-                        {% for code, name in languages %}
-                        <option value="{{ code }}" {% if code == 'auto' %}selected{% endif %}>
-                            {{ name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="target_lang" class="form-label">Target Language:</label>
-                    <select id="target_lang" name="target_lang" class="form-select">
-                        {% for code, name in languages if code != 'auto' %}
-                        <option value="{{ code }}" {% if code == 'DE' %}selected{% endif %}>
-                            {{ name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Translate</button>
-        </form>
-
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <div class="alert alert-danger mt-3">
-            {% for message in messages %}
-              <div>{{ message }}</div>
-            {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %}
-
-        {% if translation %}
-        <div class="mt-4">
-            <h2>Translation:</h2>
-            <p class="fs-5">{{ translation }}</p>
+  <div class="container">
+    <h1 class="mb-4 text-center">DeepL Translator App</h1>
+    <form method="post">
+      <div class="row mb-3">
+        <!-- Source Text Box -->
+        <div class="col-md-6">
+          <div class="mb-2 d-flex justify-content-between align-items-center">
+            <label for="sourceText" class="form-label mb-0">Source Text</label>
+            <select id="source_lang" name="source_lang" class="form-select w-auto">
+              {% for code, name in languages %}
+              <option value="{{ code }}" {% if code == 'auto' %}selected{% endif %}>
+                {{ name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="position-relative">
+            <textarea class="form-control" id="sourceText" name="text" rows="10" placeholder="Enter text to translate" required>{{ request.form.text or '' }}</textarea>
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Clear" onclick="clearInput()"></button>
+          </div>
         </div>
-        {% endif %}
-    </div>
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Translated Text Box -->
+        <div class="col-md-6">
+          <div class="mb-2 d-flex justify-content-between align-items-center">
+            <label for="translatedText" class="form-label mb-0">Translated Text</label>
+            <select id="target_lang" name="target_lang" class="form-select w-auto">
+              {% for code, name in languages if code != 'auto' %}
+              <option value="{{ code }}" {% if code == 'DE' %}selected{% endif %}>
+                {{ name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <textarea class="form-control" id="translatedText" rows="10" readonly>{{ translation or '' }}</textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Translate</button>
+      </div>
+    </form>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert alert-danger mt-3">
+        {% for message in messages %}
+        <div>{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Clear Input Script -->
+  <script>
+    function clearInput() {
+      document.getElementById('sourceText').value = "";
+    }
+  </script>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

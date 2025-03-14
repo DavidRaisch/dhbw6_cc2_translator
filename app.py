@@ -27,11 +27,11 @@ DEEPL_API_URL = "https://api-free.deepl.com/v2/translate"
 
 LANGUAGES = [
     ("auto", "Auto Detect"), ("BG", "Bulgarian"), ("CS", "Czech"), ("DA", "Danish"),
-    ("DE", "German"), ("EL", "Greek"), ("EN-GB", "English (British)"), ("EN-US", "English (American)"),
+    ("DE", "German"), ("EL", "Greek"), ("EN", "English"),
     ("ES", "Spanish"), ("ET", "Estonian"), ("FI", "Finnish"), ("FR", "French"),
     ("HU", "Hungarian"), ("IT", "Italian"), ("JA", "Japanese"), ("LT", "Lithuanian"),
-    ("LV", "Latvian"), ("NL", "Dutch"), ("PL", "Polish"), ("PT-PT", "Portuguese (European)"),
-    ("PT-BR", "Portuguese (Brazilian)"), ("RO", "Romanian"), ("RU", "Russian"), ("SK", "Slovak"),
+    ("LV", "Latvian"), ("NL", "Dutch"), ("PL", "Polish"),
+    ("PT", "Portuguese"), ("RO", "Romanian"), ("RU", "Russian"), ("SK", "Slovak"),
     ("SL", "Slovenian"), ("SV", "Swedish"), ("ZH", "Chinese")
 ]
 
@@ -86,3 +86,10 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+
+
+
+#TODO: make app nicer => two boxes for translation
+#TODO: translation should stay until deleted => add Bootstrap-X to delete input
+#TODO: write comments to the entire project
+#TODO: use wsgi

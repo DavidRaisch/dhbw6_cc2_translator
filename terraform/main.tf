@@ -37,3 +37,5 @@ resource "local_file" "inventory" {
   })
 }
 
+
+#TODO: .env file 
