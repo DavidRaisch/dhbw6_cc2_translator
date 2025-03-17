@@ -17,6 +17,10 @@ crash.*.log
 # Ignore all .tf files EXCEPT main.tf
 *.tf
 !main.tf
+!outputs.tf
+!variables.tf
+!versions.tf
+!providers.tf
 
 # Override files
 override.tf
