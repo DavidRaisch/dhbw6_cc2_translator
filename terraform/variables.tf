@@ -93,7 +93,6 @@ variable "vm_image_sku" {
 variable "mongodb_atlas_public_key" {
   description = "MongoDB Atlas Public Key"
   type        = string
-  default     = "tvkhftqp"
 }
 variable "mongodb_atlas_private_key" {
   description = "MongoDB Atlas Private Key"
@@ -131,7 +130,7 @@ variable "mongodb_db_username" {
   default     = "translator_user"
 }
 variable "mongodb_db_password" {
-  description = "MongoDB Database password"
+  description = "Set MongoDB Database user password"
   type        = string
   sensitive   = true
 }

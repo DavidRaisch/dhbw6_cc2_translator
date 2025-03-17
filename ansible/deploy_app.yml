@@ -52,6 +52,7 @@
         env:
           DEEPL_AUTH_KEY: "{{ deepL_auth_key }}"
           MONGODB_CONNECTION_STRING: "{{ database_url }}"
-
-
-#TODO: give output message with the ip adress and the port
+        
+    - name: Display Translator App URL
+      debug:
+        msg: "The Translator app is available at http://{{ hostvars[inventory_hostname].ansible_host | default(inventory_hostname) }}:5005"
