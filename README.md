@@ -55,7 +55,7 @@ DHBW6_CC2_TRANSLATOR/
    git clone git@github.com:DavidRaisch/dhbw6_cc2_translator.git
    cd dhbw6_cc2_translator
 2. Set Up Enviroment Variables
-   The project requires several environment variables for proper operation. Configure these in your environment or via a .env file if your workflow supports it.
+   The project requires several environment variables for proper operation. Configure these in your environment or via a .tfvars (.env) file if your workflow supports it.
    ```Plaintext
    azure_subscription_id: Your Azure subscription ID.
    azure_client_id: Azure service principal client ID.
