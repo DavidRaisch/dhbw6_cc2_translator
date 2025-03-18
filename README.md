@@ -56,6 +56,7 @@ DHBW6_CC2_TRANSLATOR/
    cd dhbw6_cc2_translator
 2. Set Up Enviroment Variables
    The project requires several environment variables for proper operation. Configure these in your environment or via a .env file if your workflow supports it.
+   ```Plaintext
       azure_subscription_id: Your Azure subscription ID.
       azure_client_id: Azure service principal client ID.
       azure_client_secret: Azure service principal secret.
@@ -63,7 +64,8 @@ DHBW6_CC2_TRANSLATOR/
       mongodb_atlas_public_key: MongoDB Atlas API public key.
       mongodb_atlas_private_key: MongoDB Atlas API private key.
       deepL_auth_key: mongodb_db_password
-3. Docker Build
+   ```
+4. Docker Build
     Build and Push a Docker Image for Linux VM to the Docker Hub (only necessary if change in App.py or index.html were made)
   ```bash
   docker buildx build --platform linux/amd64 -t davidraisch/translator-app:latest --push .
