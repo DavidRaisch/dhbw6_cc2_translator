@@ -1,0 +1,61 @@
+# DHBW6 CC2 Translator
+
+## Overview
+
+**DHBW6 CC2 Translator** is a Python-based translation service that leverages modern cloud infrastructure and automated configuration management. The application is containerized using Docker, ensuring consistent builds and deployments. Infrastructure is provisioned via Terraform to deploy necessary resources on Microsoft Azure and MongoDB Atlas, while an Ansible-driven deployment—executed by a dedicated Bash script—completes the configuration process.
+
+## Project Structure
+
+/ ├── t.sample # Sample configuration/environment file. ├── deploy.sh # Bash script that runs the complete Ansible deployment. ├── dhbw6_cc2_translator/ # Main project repository (Python application source code). │ ├── .git/ # Git repository data. │ └── (Python source code) # Application code for translation service. └── terraform/ # Terraform configurations for infrastructure provisioning. ├── modules/ │ ├── mongodb_atlas/ # Module to provision MongoDB Atlas resources. │ │ ├── main.tf │ │ ├── outputs.tf │ │ ├── variables.tf │ │ └── versions.tf │ └── azure_infrastructure/ # Module to provision Azure resources. │ ├── main.tf │ ├── outputs.tf │ ├── variables.tf │ └── versions.tf └── .terraform/ # Auto-generated Terraform providers and modules cache.
+
+## Getting Started
+### Prerequisites
+   - Git
+   - Docker
+   - Terraform
+   - Ansible
+   - Command Line
+
+### Installation
+1. Clone the Repository
+   ```bash
+   git clone https://your-repo-url/dhbw6_cc2_translator.git
+   cd dhbw6_cc2_translator
+2. Set Up Enviroment Variables
+   The project requires several environment variables for proper operation. Configure these in your environment or via a .env file if your workflow supports it.
+      azure_subscription_id: Your Azure subscription ID.
+      azure_client_id: Azure service principal client ID.
+      azure_client_secret: Azure service principal secret.
+      azure_tenant_id: Azure tenant ID.
+      mongodb_atlas_public_key: MongoDB Atlas API public key.
+      mongodb_atlas_private_key: MongoDB Atlas API private key.
+      deepL_auth_key: mongodb_db_password
+3. Docker Build
+    Build and Push a Docker Image for Linux VM to the Docker Hub (only necessary if change in App.py or index.html were made)
+  ```bash
+  docker buildx build --platform linux/amd64 -t davidraisch/translator-app:latest --push .
+END of Bash
+4. Terraform Deployment
+  ```Bash
+  cd terraform
+  terraform init
+  terraform plan
+  terraform apply
+5. Ansible Deployment
+  ```Bash
+  cd ..
+  cd ansible
+  chmod +x run_deployment.sh
+  ./run_deployment.sh
+  END of Bash
+  The bash script extracts the necessary variables from the terraform output and use it to deploy the App environment.
+  The Output of the ansible script is the ip address on which the app is running
+
+## Additional Notes
+### Troubleshooting
+  - Verify that all environment variables are correctly configured.
+  - Ensure your credentials (for Azure and MongoDB Atlas) have the necessary permissions.
+  - Check Docker logs, Terraform outputs, and Ansible playbook results for any errors.
+### Documentation
+Further documentation may be found within the source code comments and additional documentation files in the repository.
+   
