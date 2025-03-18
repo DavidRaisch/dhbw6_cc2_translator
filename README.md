@@ -57,33 +57,33 @@ DHBW6_CC2_TRANSLATOR/
 2. Set Up Enviroment Variables
    The project requires several environment variables for proper operation. Configure these in your environment or via a .env file if your workflow supports it.
    ```Plaintext
-      azure_subscription_id: Your Azure subscription ID.
-      azure_client_id: Azure service principal client ID.
-      azure_client_secret: Azure service principal secret.
-      azure_tenant_id: Azure tenant ID.
-      mongodb_atlas_public_key: MongoDB Atlas API public key.
-      mongodb_atlas_private_key: MongoDB Atlas API private key.
-      deepL_auth_key: mongodb_db_password
+   azure_subscription_id: Your Azure subscription ID.
+   azure_client_id: Azure service principal client ID.
+   azure_client_secret: Azure service principal secret.
+   azure_tenant_id: Azure tenant ID.
+   mongodb_atlas_public_key: MongoDB Atlas API public key.
+   mongodb_atlas_private_key: MongoDB Atlas API private key.
+   deepL_auth_key: mongodb_db_password
    ```
 4. Docker Build
     Build and Push a Docker Image for Linux VM to the Docker Hub (only necessary if change in App.py or index.html were made)
-  ```bash
-  docker buildx build --platform linux/amd64 -t davidraisch/translator-app:latest --push .
-  ```
+     ```bash
+     docker buildx build --platform linux/amd64 -t davidraisch/translator-app:latest --push .
+     ```
 4. Terraform Deployment
-  ```Bash
-  cd terraform
-  terraform init
-  terraform plan
-  terraform apply
-  ```
+     ```Bash
+     cd terraform
+     terraform init
+     terraform plan
+     terraform apply
+     ```
 5. Ansible Deployment
-  ```Bash
-  cd ..
-  cd ansible
-  chmod +x run_deployment.sh
-  ./run_deployment.sh
-  ```
+     ```Bash
+     cd ..
+     cd ansible
+     chmod +x run_deployment.sh
+     ./run_deployment.sh
+     ```
   The bash script extracts the necessary variables from the terraform output and use it to deploy the App environment.
   The Output of the ansible script is the ip address on which the app is running
 
