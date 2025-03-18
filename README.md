@@ -52,7 +52,7 @@ DHBW6_CC2_TRANSLATOR/
 ### Installation
 1. Clone the Repository
    ```bash
-   git clone https://your-repo-url/dhbw6_cc2_translator.git
+   git clone git@github.com:DavidRaisch/dhbw6_cc2_translator.git
    cd dhbw6_cc2_translator
 2. Set Up Enviroment Variables
    The project requires several environment variables for proper operation. Configure these in your environment or via a .env file if your workflow supports it.
