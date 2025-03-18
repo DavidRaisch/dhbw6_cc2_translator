@@ -6,7 +6,25 @@
 
 ## Project Structure
 
-/ ├── t.sample # Sample configuration/environment file. ├── deploy.sh # Bash script that runs the complete Ansible deployment. ├── dhbw6_cc2_translator/ # Main project repository (Python application source code). │ ├── .git/ # Git repository data. │ └── (Python source code) # Application code for translation service. └── terraform/ # Terraform configurations for infrastructure provisioning. ├── modules/ │ ├── mongodb_atlas/ # Module to provision MongoDB Atlas resources. │ │ ├── main.tf │ │ ├── outputs.tf │ │ ├── variables.tf │ │ └── versions.tf │ └── azure_infrastructure/ # Module to provision Azure resources. │ ├── main.tf │ ├── outputs.tf │ ├── variables.tf │ └── versions.tf └── .terraform/ # Auto-generated Terraform providers and modules cache.
+```plaintext
+/
+├── t.sample                        # Sample configuration file for environment settings
+├── dhbw6_cc2_translator/           # Main project repository
+│   ├── .git/                      # Git repository files
+│   └── ...                        # (Application source code would be here)
+└── terraform/                     # Terraform configuration for infrastructure deployment
+    ├── modules/
+    │   ├── mongodb_atlas/
+    │   │   ├── main.tf            # MongoDB Atlas provisioning
+    │   │   ├── outputs.tf         # Output variables
+    │   │   ├── variables.tf       # Input variables for configuration
+    │   │   └── versions.tf        # Provider versions
+    │   └── azure_infrastructure/
+    │       ├── main.tf            # Azure resource provisioning
+    │       ├── outputs.tf         # Output variables
+    │       ├── variables.tf       # Input variables for configuration
+    │       └── versions.tf        # Provider versions
+    └── .terraform/                # Terraform providers and modules cache (auto-generated)
 
 ## Getting Started
 ### Prerequisites
