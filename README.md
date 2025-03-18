@@ -63,7 +63,8 @@ DHBW6_CC2_TRANSLATOR/
    azure_tenant_id: Azure tenant ID.
    mongodb_atlas_public_key: MongoDB Atlas API public key.
    mongodb_atlas_private_key: MongoDB Atlas API private key.
-   deepL_auth_key: mongodb_db_password
+   deepL_auth_key: API Key for Translator
+   mongodb_db_password: Set Password for MongoDB Database User
    ```
 4. Docker Build
     Build and Push a Docker Image for Linux VM to the Docker Hub (only necessary if change in App.py or index.html were made)
