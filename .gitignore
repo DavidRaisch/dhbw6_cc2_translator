@@ -46,3 +46,7 @@ terraform.rc
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+#testenv
+testenv
+test/venv
