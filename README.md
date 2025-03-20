@@ -93,17 +93,17 @@ To test the Translator App, you need to perform the following steps:
 1. Create a file "testenv" with the "MONGODB_CONNECTION_STRING" and the "DEEPL_AUTH_KEY" in the dhbw6_cc2_translator directory
 2. Create a virtual Enviroment venv
    ```Bash
-      python3 -m venv venv
-      source venv/bin/activate  # On Linux/MacOS
-      pip3 install pytest
+   python3 -m venv venv
+   source venv/bin/activate  # On Linux/MacOS
+   pip3 install pytest
    ````
 3. Install all requieremnts in this virtual enviroment
    ```Bash
-      pip3 install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 4. Run the test script "test_app.py"
    ```Bash
-      pytest test/test_app.py
+   pytest test/test_app.py
    ````
    Make sure you are in the dhbw6_cc2_translator directory
 
